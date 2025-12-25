@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%234F46E5'/%3E%3Cstop offset='100%25' stop-color='%2314B8A6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M 80,20 C 80,10 70,10 60,10 S 20,10 20,30 S 80,70 80,90 S 30,90 20,90' fill='none' stroke='url(%23g)' stroke-width='14' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Saarthi - Your Life Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'brand-indigo': '#4F46E5',
+              'brand-indigo-light': '#6366F1',
+              'brand-yellow': '#FBBF24',
+              'brand-teal': '#14B8A6',
+              'brand-orange': '#F97316',
+              'brand-pink': '#EC4899',
+              'brand-off-white': '#F9FAFB',
+              'brand-gray': '#6B7280',
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .page-fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        .btn-glow:hover {
+            box-shadow: 0 0 20px 3px rgba(79, 70, 229, 0.5), 0 0 8px 0 rgba(20, 184, 166, 0.4);
+        }
+        .ultra-simple-mode .button-like {
+            padding: 0.8rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .ultra-simple-mode .simplified-card {
+            padding: 1.5rem;
+        }
+        .ultra-simple-mode h1 {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+        }
+        @keyframes slideInUp {
+            from { transform: translateY(20px) scale(0.95); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+        @keyframes fadeOutDown {
+            from { transform: translateY(0) scale(1); opacity: 1; }
+            to { transform: translateY(20px) scale(0.95); opacity: 0; }
+        }
+        .chatbot-enter {
+            animation: slideInUp 0.3s ease-out forwards;
+        }
+        .chatbot-exit {
+             animation: fadeOutDown 0.2s ease-in forwards;
+        }
+        @keyframes typing-bubble {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+        @keyframes dropdown-enter {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        .dropdown-enter-active {
+            animation: dropdown-enter 0.15s ease-out forwards;
+            transform-origin: top;
+        }
+        @keyframes voice-panel-enter {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        /* Styles for scroll animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+            will-change: opacity, transform;
+        }
+        .scroll-reveal--visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @keyframes gradient-bg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        body.dark {
+            background-color: #111827;
+            background-image: linear-gradient(135deg, #111827 0%, #1F2937 50%, #111827 100%);
+            background-size: 400% 400%;
+            animation: gradient-bg 20s ease infinite;
+        }
+
+        /* Styles for Family Share Mode */
+        .share-view {
+            padding-top: 0 !important;
+        }
+        .share-view .no-share {
+            display: none !important;
+        }
+        .share-view main {
+            padding-top: 1rem !important;
+        }
+        /* In share view, force grid columns to be single for simpler layout */
+        .share-view .force-single-col {
+            grid-template-columns: 1fr !important;
+        }
+        .share-view .force-single-col > * {
+            grid-column: 1 / -1 !important;
+        }
+
+        @media print {
+            /* Hide elements that shouldn't be printed */
+            .no-print {
+                display: none !important;
+            }
+
+            /* Reset base styles for printing */
+            body, html {
+                background: white !important;
+                color: black !important;
+                /* Ensures backgrounds print in browsers like Chrome */
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            /* Remove padding that was for the fixed navbar */
+            body {
+                padding-top: 0 !important;
+            }
+            main {
+                padding-top: 1rem !important;
+            }
+
+            /* Universal reset for print. Overrides dark mode and other styles. */
+            * {
+                background: transparent !important;
+                color: inherit !important; /* Inherit black from body */
+                box-shadow: none !important;
+                text-shadow: none !important;
+                border-color: #dee2e6 !important; /* A light grey for borders */
+            }
+
+            /* Make links visible and useful on paper */
+            a, a:visited {
+                text-decoration: underline !important;
+                color: #000 !important;
+            }
+
+            /* Show the URL next to links, but not for internal hashes or javascript calls */
+            a[href]:not([href^="#"]):not([href^="javascript"]):after {
+                content: " (" attr(href) ")";
+                font-size: 90%;
+                color: #555;
+            }
+
+            /* Avoid breaking inside these elements */
+            details, figure, img {
+                page-break-inside: avoid;
+            }
+            
+            details[open] {
+              display: block; /* Ensure open details are visible and content prints */
+            }
+
+            summary {
+              page-break-after: avoid;
+            }
+        }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.11.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
+    "express": "https://esm.sh/express@^5.2.1",
+    "cors": "https://esm.sh/cors@^2.8.5",
+    "body-parser": "https://esm.sh/body-parser@^2.2.1"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-brand-off-white dark:bg-gray-900">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

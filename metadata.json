@@ -1,0 +1,8 @@
+{
+  "name": "Saarthi",
+  "description": "An India-first life guidance website that helps people of all age groups navigate essential life tasks and government schemes through clear, step-by-step guidance in simple language.",
+  "requestFramePermissions": [
+    "geolocation",
+    "microphone"
+  ]
+}
