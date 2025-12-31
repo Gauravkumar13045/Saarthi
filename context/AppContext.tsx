@@ -164,15 +164,17 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         }
         setLanguageState(lang);
         localStorage.setItem('saarthi-lang', lang);
-      } catch (error) {
-        console.error("Failed to translate locale:", error);
-        setToast({ message: 'Could not translate the website. Reverting to English.', type: 'error' });
-        setCustomLocale(null);
-        setLanguageState('en');
-        localStorage.setItem('saarthi-lang', 'en');
-      } finally {
-        setIsTranslating(false);
-      }
+      } // Replace the catch block in setLanguage(...) with this:
+ catch (error) {
+  console.error("Failed to translate locale:", error);
+  setToast({ message: 'Could not translate the website. Showing English until translation is available.', type: 'error' });
+  setCustomLocale(null);
+  // Do NOT overwrite the user's saved preference in localStorage so we can retry later.
+  setLanguageState('en');
+  // localStorage.setItem('saarthi-lang', 'en');   <-- removed
+} finally {
+  setIsTranslating(false);
+}
     }
   };
   
